@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Attendance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">AT</div>
+          <div>
+            <h1>Attendance Tracker</h1>
+            <p class="sub">Daily fast tracker • Required: <strong>75%</strong> • Saved locally</p>
+          </div>
+        </div>
+
+        <div class="top__actions">
+          <button class="btn btn--primary" id="btnAdd" type="button">Add Subject</button>
+          <button class="btn btn--danger" id="btnReset" type="button" title="Clear all subjects">
+            Reset
+          </button>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="cards" id="cards" aria-label="Subjects"></section>
+        <section class="empty hidden" id="emptyState">No subjects yet. Click “Add Subject”.</section>
+      </main>
+
+      <footer class="overall" aria-label="Overall attendance summary">
+        <div class="overall__left">
+          <div class="overall__title">Overall</div>
+          <div class="overall__value">
+            <span id="overallText">0/0</span>
+            <span class="dot">•</span>
+            <span id="overallPercent">0%</span>
+          </div>
+        </div>
+        <div class="overall__bar" aria-label="Overall progress bar">
+          <div class="barTrack"><div class="barFill" id="overallBar" style="width: 0%"></div></div>
+        </div>
+      </footer>
+    </div>
+
+    <dialog id="subjectDialog" class="dialog">
+      <form method="dialog" class="dialog__body" id="subjectForm">
+        <input type="hidden" id="editingId" value="" />
+
+        <div class="dialog__head">
+          <h2 id="dialogTitle">Add Subject</h2>
+          <p class="sub">Keep it simple: enter current counts.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="field">
+            <label for="subjectName">Subject Name</label>
+            <input id="subjectName" name="subjectName" type="text" placeholder="e.g., OS" maxlength="50" required />
+          </div>
+          <div class="field">
+            <label for="subjectType">Type</label>
+            <select id="subjectType" name="subjectType" required>
+              <option value="theory">Theory</option>
+              <option value="practical">Practical</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="theoryFields" class="grid2">
+          <div class="field">
+            <label for="theoryAttended">Attended</label>
+            <input id="theoryAttended" type="number" inputmode="numeric" min="0" step="1" value="0" />
+          </div>
+          <div class="field">
+            <label for="theoryTotal">Total</label>
+            <input id="theoryTotal" type="number" inputmode="numeric" min="0" step="1" value="0" />
+          </div>
+        </div>
+
+        <div id="practicalFields" class="stack hidden" aria-hidden="true">
+          <div class="section">
+            <div class="section__title">PP (Practical Theory)</div>
+            <div class="grid2">
+              <div class="field">
+                <label for="ppAttended">Attended</label>
+                <input id="ppAttended" type="number" inputmode="numeric" min="0" step="1" value="0" />
+              </div>
+              <div class="field">
+                <label for="ppTotal">Total</label>
+                <input id="ppTotal" type="number" inputmode="numeric" min="0" step="1" value="0" />
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section__title">PR (Lab)</div>
+            <div class="grid2">
+              <div class="field">
+                <label for="prAttended">Attended</label>
+                <input id="prAttended" type="number" inputmode="numeric" min="0" step="1" value="0" />
+              </div>
+              <div class="field">
+                <label for="prTotal">Total</label>
+                <input id="prTotal" type="number" inputmode="numeric" min="0" step="1" value="0" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dialog__actions">
+          <button class="btn" type="button" id="btnCancel">Cancel</button>
+          <button class="btn btn--primary" type="submit" value="ok" id="btnSave">Save</button>
+        </div>
+        <div class="note" id="formNote" role="status" aria-live="polite"></div>
+      </form>
+    </dialog>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>
